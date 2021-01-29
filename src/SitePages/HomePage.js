@@ -8,7 +8,7 @@ class HomePage extends React.Component {
 
   render() {
     const { diet = [] } = this.context;
-    let remainingCal = diet[0].cal_limit - diet[0].cal_eaten;
+    let remainingCal = (diet[0] && diet[0].cal_limit) - (diet[0] && diet[0].cal_eaten);
     return (
       <div>
         <section>
