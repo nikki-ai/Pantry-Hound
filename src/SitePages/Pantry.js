@@ -33,7 +33,7 @@ class Pantry extends React.Component {
           <section>
             <h2>My Pantry</h2>
 
-            <label htmlFor='Add food button'>
+            <label htmlFor='Add-food-button'>
               <Link to='/AddFood' className='popup bone'>
                 <div className='c1'></div>
                 <div className='c2'></div>

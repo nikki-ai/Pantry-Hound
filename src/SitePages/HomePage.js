@@ -16,10 +16,10 @@ class HomePage extends React.Component {
         <div>
           <section>
             <h2>Home</h2>
-            <label htmlFor='calorie meter'>Cal. Meter</label>
+            <label htmlFor='calorie-meter'>Cal. Meter</label>
             <br />
             <meter
-              id='calorie meter'
+              id='calorie-meter'
               min='0'
               max={diet[0] && diet[0].cal_limit}
               low='0.3'

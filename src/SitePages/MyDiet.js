@@ -65,7 +65,7 @@ class MyDiet extends React.Component {
         </section>
 
         <form onSubmit={(e) => this.handleSubmit(e)}>
-          <label htmlFor='New calorie limit'>New Cal Limit:</label>
+          <label htmlFor='New-calorie-limit'>New Cal Limit:</label>
           <br />
           <input type='text' name='calLimit' required />
           <br/><br/>
