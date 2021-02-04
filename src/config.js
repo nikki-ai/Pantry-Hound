@@ -1,4 +1,4 @@
 const config =  {
-    url: 'http://localhost:8000'
+    url: 'https://enigmatic-gorge-59795.herokuapp.com'
 }
 export default config;

@@ -9,6 +9,7 @@ import MyInfo from './SitePages/MyInfo';
 import AddFood from './SitePages/AddFood';
 import FetchMeFood from './SitePages/FetchMeFood';
 import './Main.css';
+import ErrorBoundaries from './ErrorBoundaries';
 
 class App extends React.Component {
   constructor() {
@@ -67,10 +68,10 @@ class App extends React.Component {
     let calEaten = this.state.diet[0].cal_eaten;
     let addCal = food.cal;
     const newCalEaten = parseFloat(calEaten) + parseFloat(addCal);
-    
+
     console.log(newCalEaten, 'test');
     console.log(this.state.diet[0].id);
-    
+
     fetch(`${config.url}/diet/${this.state.diet[0].id}`, {
       method: 'PATCH',
       body: JSON.stringify({
@@ -118,42 +119,43 @@ class App extends React.Component {
 
     return (
       <ApiContext.Provider value={value}>
-        <header>
-          <section className='titleBar'>
-            <Link to='/'>
-              <h1>Pantry Hound</h1>
-            </Link>
-          </section>
+        <ErrorBoundaries>
+          <header>
+            <section className='titleBar'>
+              <Link to='/'>
+                <h1>Pantry Hound</h1>
+              </Link>
+            </section>
 
-          <nav>
-            <ul id='menu'>
-              <li className='circle'>
-                <a href='HomePage'>Home</a>
-              </li>
-              <li className='circle'>
-                <a href='Pantry'>My Pantry</a>
-              </li>
-              <li className='circle'>
-                <a href='MyDiet'>My Diet</a>
-              </li>
-              <li className='circle'>
-                <a href='MyInfo'>My Info</a>
-              </li>
-            </ul>
-          </nav>
-        </header>
+            <nav>
+              <ul id='menu'>
+                <li className='circle'>
+                  <a href='HomePage'>Home</a>
+                </li>
+                <li className='circle'>
+                  <a href='Pantry'>My Pantry</a>
+                </li>
+                <li className='circle'>
+                  <a href='MyDiet'>My Diet</a>
+                </li>
+                <li className='circle'>
+                  <a href='MyInfo'>My Info</a>
+                </li>
+              </ul>
+            </nav>
+          </header>
+          <Route path='/HomePage' component={HomePage} />
 
-        <Route path='/HomePage' component={HomePage} />
+          <Route path='/FetchMeFood' component={FetchMeFood} />
 
-        <Route path='/FetchMeFood' component={FetchMeFood} />
+          <Route path='/Pantry' component={Pantry} />
 
-        <Route path='/Pantry' component={Pantry} />
+          <Route path='/MyDiet' component={MyDiet} />
 
-        <Route path='/MyDiet' component={MyDiet} />
+          <Route path='/MyInfo' component={MyInfo} />
 
-        <Route path='/MyInfo' component={MyInfo} />
-
-        <Route path='/AddFood' component={AddFood} />
+          <Route path='/AddFood' component={AddFood} />
+        </ErrorBoundaries>
       </ApiContext.Provider>
     );
   }

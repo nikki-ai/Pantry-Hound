@@ -3,6 +3,7 @@ import { Component } from 'react';
 import ApiContext from '../ApiContext';
 import '../Main.css';
 import config from '../config';
+import ErrorBoundaries from '../ErrorBoundaries';
 
 class AddFood extends Component {
   constructor(props) {
@@ -21,8 +22,8 @@ class AddFood extends Component {
     const fCal = e.target.foodCal.value;
 
     fetch(`${config.url}/pantry`, {
-      method: "POST",
-      body: JSON.stringify({ 
+      method: 'POST',
+      body: JSON.stringify({
         title: fName,
         cal: fCal,
       }),
@@ -49,20 +50,22 @@ class AddFood extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          <label htmlFor='food name'>Food name:</label>
-          <br />
-          <input type='text' name='foodName' required/>
-          <br />
-          <label htmlFor='calorie count'>Calories per serving:</label>
-          <br />
-          <input type='text' name='foodCal' required/>
-          <br />
-          <button type = "submit">Submit</button>
-          <button onClick={() => this.props.history.goBack()}>Cancel</button>
-        </form>
-      </div>
+      <ErrorBoundaries>
+        <div>
+          <form onSubmit={(e) => this.handleSubmit(e)}>
+            <label htmlFor='food name'>Food name:</label>
+            <br />
+            <input type='text' name='foodName' required />
+            <br />
+            <label htmlFor='calorie count'>Calories per serving:</label>
+            <br />
+            <input type='text' name='foodCal' required />
+            <br />
+            <button type='submit'>Submit</button>
+            <button onClick={() => this.props.history.goBack()}>Cancel</button>
+          </form>
+        </div>
+      </ErrorBoundaries>
     );
   }
 }

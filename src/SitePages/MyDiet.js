@@ -2,6 +2,7 @@ import React from 'react';
 import ApiContext from '../ApiContext';
 import '../Main.css';
 import config from '../config';
+import ErrorBoundaries from '../ErrorBoundaries';
 
 class MyDiet extends React.Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class MyDiet extends React.Component {
     const { diet = [] } = this.context;
 
     return (
+      <ErrorBoundaries>
       <div>
         <h2>My Diet</h2>
 
@@ -72,6 +74,7 @@ class MyDiet extends React.Component {
         </form>
 
       </div>
+      </ErrorBoundaries>
     );
   }
 }

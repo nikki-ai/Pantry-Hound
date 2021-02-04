@@ -1,42 +1,60 @@
 import React from 'react';
 import ApiContext from '../ApiContext';
 import '../Main.css';
+import ErrorBoundaries from '../ErrorBoundaries';
 
 class FetchMeFood extends React.Component {
+  static defaultProps = {
+    onEatFood: () => {},
+  };
 
-    static defaultProps = {
-        onEatFood: () => {},
-    }
-  
-    static contextType = ApiContext;
+  static contextType = ApiContext;
 
-    handleClickEat = (e, id) => {
-        e.preventDefault();
-        const foodId = id;
-        this.context.eatFood(foodId);
-        this.props.onEatFood(foodId);
-        console.log('eat button works');
-      };
-  
-    render() {
-      const { pantry = [] } = this.context;
-  
-      return (
+  handleClickEat = (e, id) => {
+    e.preventDefault();
+    const foodId = id;
+    this.context.eatFood(foodId);
+    this.props.onEatFood(foodId);
+    console.log('eat button works');
+  };
+
+  fetchedFood() {
+    console.log(this.context.pantry, 'This is my new test');
+  }
+
+  render() {
+    let { pantry = [], diet = [] } = this.context;
+    let remainingCal =
+      (diet[0] && diet[0].cal_limit) - (diet[0] && diet[0].cal_eaten);
+    pantry = pantry.filter(pan => pan.cal < remainingCal);
+    return (
+      <ErrorBoundaries>
         <div>
           <h2>Select foods to eat</h2>
-            <section className='border pantryStyle'>
-              {pantry.map((pan) => (
-                <h3 key={pan.id}>
-                  {pan.title}
-                  {': '}
-                  {pan.cal}
-                  {'cal.'} <button onClick={(e) => this.handleClickEat(e, pan.id)}>Eat food</button>
-                </h3>
-              ))}
-            </section>
-                
-            <label htmlFor='cancel button'>
-            <button onClick={() => this.props.history.goBack()} className='bone'>
+          {/* Pantry.map (pan) and if pan.cal < remainingCal then 
+          display the pan.title and pan.cal
+          
+          filter pantry before return*/}
+          {console.log(remainingCal)}
+          <section className='border pantryStyle'>
+            {pantry.map((pan) => (
+              <h3 key={pan.id}>
+                {pan.title}
+                {': '}
+                {pan.cal}
+                {'cal.'}{' '}
+                <button onClick={(e) => this.handleClickEat(e, pan.id)}>
+                  Eat food
+                </button>
+              </h3>
+            ))}
+          </section>
+
+          <label htmlFor='cancel button'>
+            <button
+              onClick={() => this.props.history.goBack()}
+              className='bone'
+            >
               <div className='c1'></div>
               <div className='c2'></div>
               <div className='c3'></div>
@@ -47,8 +65,9 @@ class FetchMeFood extends React.Component {
             </button>
           </label>
         </div>
-      );
-    }
+      </ErrorBoundaries>
+    );
   }
+}
 
 export default FetchMeFood;
