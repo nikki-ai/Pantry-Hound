@@ -15,12 +15,7 @@ class FetchMeFood extends React.Component {
     const foodId = id;
     this.context.eatFood(foodId);
     this.props.onEatFood(foodId);
-    console.log('eat button works');
   };
-
-  fetchedFood() {
-    console.log(this.context.pantry, 'This is my new test');
-  }
 
   render() {
     let { pantry = [], diet = [] } = this.context;
@@ -31,11 +26,6 @@ class FetchMeFood extends React.Component {
       <ErrorBoundaries>
         <div>
           <h2>Select foods to eat</h2>
-          {/* Pantry.map (pan) and if pan.cal < remainingCal then 
-          display the pan.title and pan.cal
-          
-          filter pantry before return*/}
-          {console.log(remainingCal)}
           <section className='border pantryStyle'>
             {pantry.map((pan) => (
               <h3 key={pan.id}>

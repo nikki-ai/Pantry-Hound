@@ -32,7 +32,6 @@ class App extends React.Component {
         return Promise.all([pantryResponse.json(), dietResponse.json()]);
       })
       .then(([pantry, diet]) => {
-        console.log(pantry, diet, 'this is from fetch');
         this.setState({ pantry, diet });
       })
       .catch((error) => {
@@ -69,9 +68,6 @@ class App extends React.Component {
     let addCal = food.cal;
     const newCalEaten = parseFloat(calEaten) + parseFloat(addCal);
 
-    console.log(newCalEaten, 'test');
-    console.log(this.state.diet[0].id);
-
     fetch(`${config.url}/diet/${this.state.diet[0].id}`, {
       method: 'PATCH',
       body: JSON.stringify({
@@ -86,13 +82,10 @@ class App extends React.Component {
           throw new Error('Something went wrong, could not eat food');
         }
         calEaten = newCalEaten;
-        console.log(calEaten, 'line 86');
       })
       .catch((err) => {
         alert(err);
       });
-
-    console.log(calEaten, 'line 92');
   };
 
   addFood = (newFood) => {
@@ -115,7 +108,6 @@ class App extends React.Component {
       deleteFood: this.handleDeleteFood,
       eatFood: this.handleEatFood,
     };
-    console.log(value, 'this is value');
 
     return (
       <ApiContext.Provider value={value}>

@@ -11,12 +11,6 @@ class Pantry extends React.Component {
 
   static contextType = ApiContext;
 
-  // When the user clicks on <div>, open the popup
-  // popUpFunction() {
-  //   let popup = document.getElementById('myPopup');
-  //   popup.classList.toggle('show');
-  // }
-
   handleClickDelete = (e, id) => {
     e.preventDefault();
     const foodId = id;

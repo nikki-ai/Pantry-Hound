@@ -39,8 +39,6 @@ class AddFood extends Component {
       })
       .then((data) => {
         this.context.addFood(data);
-        console.log(data, 'this is the test data(addFood)');
-
         this.props.history.goBack();
       })
       .catch((err) => {
